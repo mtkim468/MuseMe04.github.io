@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chatbot Page</title>
+    <style>
+        /* This style centers the chat container in the middle of the screen */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide scrollbars */
+        }
+        #WebChatContainer {
+            width: 55vh; /* Set the width to be half of the viewport height */
+            height: 100%; /* Full height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide the inner scrollbars, if necessary */
+        }
+        /* Hides the Watson Assistant launcher icon */
+        .WatsonAssistantChatHost_launcher {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="WebChatContainer"></div>
+    <script>
+        const customElement = document.querySelector('#WebChatContainer');
+        window.watsonAssistantChatOptions = {
+            integrationID: "4acb3f95-305b-483f-a992-19333d11259f",
+            region: "au-syd",
+            serviceInstanceID: "8931e684-fe77-4297-94c3-34c2cc06ba5a",
+            element: customElement,
+            onLoad: function(instance) {
+                instance.render();
+                instance.openWindow();
+            }
+        };
+        setTimeout(function(){
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+</body>
+</html>
